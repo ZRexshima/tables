@@ -14,9 +14,9 @@ TABLE_DATA = (
 
 pdf.add_page()
 pdf.set_font("Times", size=16)
-with pdf.table() as table:
+with pdf.table(first_row_as_headings=False) as table:
     for data_row in TABLE_DATA:
         row = table.row()
         for datum in data_row:
             row.cell(datum)
-pdf.output("table.pdf")
+pdf.output("headerless-table.pdf")
