@@ -1,4 +1,5 @@
 from fpdf import FPDF
+from fpdf.fonts import FontFace
 
 pdf = FPDF()
 pdf.set_font("Helvetica")
@@ -12,11 +13,14 @@ TABLE_DATA = (
     ("Lucas", "Cimon", "31", "Saint-Mathurin-sur-Loire"),
 )
 
+blue = (0, 0, 255)
+grey = (128, 128, 128)
+headings_style = FontFace(emphasis="ITALICS", color=blue, fill_color=grey)
 pdf.add_page()
 pdf.set_font("Times", size=16)
-with pdf.table(first_row_as_headings=False) as table:
+with pdf.table(headings_style=headings_style) as table:
     for data_row in TABLE_DATA:
         row = table.row()
         for datum in data_row:
             row.cell(datum)
-pdf.output("headerless-table.pdf")
+pdf.output("styled-headers-table.pdf")
